@@ -8,7 +8,11 @@ public class BatteryItem : MonoBehaviour, IInteractable
     {
         return "[E] 손전등 배터리 줍기";
     }
-
+    void Start()
+    {
+        if (flashlightController == null)
+            flashlightController = FindAnyObjectByType<FlashlightController>();
+    }
     public void OnInteract()
     {
         if (flashlightController != null)

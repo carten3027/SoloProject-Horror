@@ -46,8 +46,9 @@ public class FirstPersonController : MonoBehaviour
 
     void HandleMovement()
     {
-        float horizontal = Input.GetAxis("Horizontal");
-        float vertical = Input.GetAxis("Vertical");
+        // GetAxis 대신 GetAxisRaw를 사용하여 키를 떼는 즉시 멈추도록 수정
+        float horizontal = Input.GetAxisRaw("Horizontal");
+        float vertical = Input.GetAxisRaw("Vertical");
         bool isMoving = (Mathf.Abs(horizontal) > 0.1f || Mathf.Abs(vertical) > 0.1f);
 
         // 탈진 상태에서 스태미나가 기준치(30%) 이상 차오르면 탈진 해제

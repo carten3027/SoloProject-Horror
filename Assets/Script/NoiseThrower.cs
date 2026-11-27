@@ -78,4 +78,23 @@ public class ThrownNoiseMaker : MonoBehaviour
 
         Destroy(gameObject, 1.5f); // 1.5초 뒤 파편 제거
     }
+    void Start()
+    {
+        // 맵에 놓인 파밍용 플라스크일 때 카메라의 투척기를 자동으로 찾아 연결
+        if (isPickupItem && playerThrower == null)
+        {
+            foreach (NoiseThrower nt in FindObjectsByType<NoiseThrower>(FindObjectsSortMode.None))
+            {
+                if (!nt.isPickupItem)
+                {
+                    playerThrower = nt;
+                    break;
+                }
+            }
+        }
+        if (!isPickupItem && targetEnemy == null)
+        {
+            targetEnemy = FindAnyObjectByType<EnemyAI>();
+        }
+    }
 }

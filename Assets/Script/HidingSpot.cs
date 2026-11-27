@@ -18,6 +18,9 @@ public class HidingSpot : MonoBehaviour, IInteractable
 
     void Start()
     {
+        if (playerController == null)
+            playerController = FindAnyObjectByType<FirstPersonController>();
+
         if (playerController != null)
             charController = playerController.GetComponent<CharacterController>();
 

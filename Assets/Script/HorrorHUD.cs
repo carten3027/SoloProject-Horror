@@ -106,10 +106,17 @@ public class HorrorHUD : MonoBehaviour
 
         if (flashlightController != null)
         {
-            string flashReady = (flashlightController.currentBattery >= 80f) ? " (섬광 가능!)" : "";
-            GUI.Label(new Rect(25, lineY, 290, 25),
-                $"배터리 : {Mathf.FloorToInt(flashlightController.currentBattery)}%{flashReady} | 여분 : {flashlightController.spareBatteries}개",
-                statusTextStyle);
+            if (!flashlightController.hasFlashlight)
+            {
+                GUI.Label(new Rect(25, lineY, 290, 25), $"손전등 : 미보유 (여분 배터리: {flashlightController.spareBatteries}개)", warningTextStyle);
+            }
+            else
+            {
+                string flashReady = (flashlightController.currentBattery >= flashlightController.stunBatteryCost) ? " (섬광 가능!)" : "";
+                GUI.Label(new Rect(25, lineY, 290, 25),
+                    $"배터리 : {Mathf.FloorToInt(flashlightController.currentBattery)}%{flashReady} | 여분 : {flashlightController.spareBatteries}개",
+                    statusTextStyle);
+            }
             lineY += 25f;
         }
 
